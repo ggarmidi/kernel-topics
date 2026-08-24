@@ -17,6 +17,7 @@ properties:
   compatible:
     items:
       - enum:
+          - qcom,glymur-eud
           - qcom,sc7280-eud
           - qcom,sm8350-eud
       - const: qcom,eud
@@ -107,7 +108,9 @@ oneOf:
           properties:
             compatible:
               contains:
-                const: qcom,sc7280-eud
+                enum:
+                  - qcom,glymur-eud
+                  - qcom,sc7280-eud
         then:
           required:
             - eud-path@0
