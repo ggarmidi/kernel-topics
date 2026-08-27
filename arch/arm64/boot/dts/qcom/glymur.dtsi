@@ -2495,6 +2495,41 @@
 			status = "disabled";
 		};
 
+		eud: eud@fd0000 {
+			compatible = "qcom,glymur-eud", "qcom,eud";
+			reg = <0x0 0x00fd0000 0x0 0x2000>,
+			      <0x0 0x00fd2000 0x0 0x1000>;
+			interrupts-extended = <&pdc 15 IRQ_TYPE_LEVEL_HIGH>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			eud0: eud-path@0 {
+				reg = <0>;
+				usb-role-switch;
+
+				ports {
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					port@0 {
+						reg = <0>;
+
+						eud_usb: endpoint {
+							remote-endpoint = <&usb_0_dwc3_hs>;
+						};
+					};
+
+					port@1 {
+						reg = <1>;
+
+						eud_con: endpoint {
+						};
+					};
+				};
+			};
+		};
+
 		usb_0_hsphy: phy@fd3000 {
 			compatible = "qcom,glymur-m31-eusb2-phy",
 				     "qcom,sm8750-m31-eusb2-phy";
@@ -4615,6 +4650,7 @@
 					reg = <0>;
 
 					usb_0_dwc3_hs: endpoint {
+						remote-endpoint = <&eud_usb>;
 					};
 				};
 

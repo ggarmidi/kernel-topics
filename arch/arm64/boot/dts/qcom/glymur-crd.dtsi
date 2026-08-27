@@ -90,7 +90,7 @@
 					reg = <0>;
 
 					pmic_glink_hs_in: endpoint {
-						remote-endpoint = <&usb_0_dwc3_hs>;
+						remote-endpoint = <&eud_con>;
 					};
 				};
 
@@ -587,6 +587,10 @@
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
+};
+
+&eud_con {
+	remote-endpoint = <&pmic_glink_hs_in>;
 };
 
 &i2c9 {
@@ -1151,10 +1155,6 @@
 
 &usb_0 {
 	status = "okay";
-};
-
-&usb_0_dwc3_hs {
-	remote-endpoint = <&pmic_glink_hs_in>;
 };
 
 &usb_0_hsphy {
